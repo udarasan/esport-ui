@@ -15,13 +15,13 @@
           <h3 class="text-center mb-4">Sign In</h3>
           <form action="#" class="login-form">
             <div class="form-group m-3">
-              <input type="text" class="form-control rounded-left" placeholder="Username" required>
+              <input type="text" class="form-control rounded-left" placeholder="Username" [formControl]="username" required>
             </div>
             <div class="form-group m-3 d-flex">
-              <input type="password" class="form-control rounded-left" placeholder="Password" required>
+              <input type="password" class="form-control rounded-left" placeholder="Password" [formControl]="password" required>
             </div>
             <div class="form-group m-3">
-              <button type="submit" class="form-control btn btn-primary rounded submit px-3">Login</button>
+              <button type="button" (click)="loginFunction()" class="form-control btn btn-primary rounded submit px-3">Login</button>
             </div>
             <div class="form-group m-3 d-md-flex">
               <div class="w-50">

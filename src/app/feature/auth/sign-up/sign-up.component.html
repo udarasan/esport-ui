@@ -15,23 +15,23 @@
           <h3 class="text-center mb-4">Sign Up</h3>
           <form action="#" class="login-form">
             <div class="form-group m-3">
-              <input type="text" class="form-control rounded-left" placeholder="Username" required>
+              <input type="text" class="form-control rounded-left" placeholder="Username" [formControl]="username" required>
             </div>
             <div class="form-group m-3">
-              <input type="email" class="form-control rounded-left" placeholder="Email" required>
+              <input type="email" class="form-control rounded-left" placeholder="Email" [formControl]="email" required>
             </div>
             <div class="form-group m-3">
-              <input type="text" class="form-control rounded-left" placeholder="Country" required>
+              <input type="text" class="form-control rounded-left" placeholder="Country" [formControl]="country" required>
             </div>
 
             <div class="form-group m-3 d-flex">
-              <input type="password" class="form-control rounded-left" placeholder="Password" required>
+              <input type="password" class="form-control rounded-left" placeholder="Password" [formControl]="password" required>
             </div>
             <div class="form-group m-3 d-flex">
-              <input type="password" class="form-control rounded-left" placeholder="Conform Password" required>
+              <input type="password" class="form-control rounded-left" placeholder="Conform Password" [formControl]="cpassword" required>
             </div>
             <div class="form-group m-3">
-              <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
+              <button type="button" (click)="signUpFunction()" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
             </div>
             <div class="form-group m-3 d-md-flex">
               <div class="w-50">
