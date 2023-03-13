@@ -1,30 +1,30 @@
 <div class="row  row-cols-lg-3 align-items-stretch g-4 py-5">
-  <div class="col">
+  <div class="col" *ngFor="let event of dataSource" (click)="redirectoeventpage(event['eventId'])">
   <div class="card shadow-sm">
     <img src="assets/51797928_1499160080214238_1803249020022292480_o-750x420.jpg" class="bd-placeholder-img card-img-top" width="100%" height="225">
     <div class="card-body">
       <div class="row border m-1">
         <div class="col">
-          <h3 class="card-text"> Country </h3>
+          <h3 class="card-text"> Event Name </h3>
         </div>
         <div class="col">
-          <h3 class="card-text"> Sri Lanka</h3>
-        </div>
-      </div>
-      <div class="row border m-1">
-        <div class="col">
-          <h3 class="card-text"> Country </h3>
-        </div>
-        <div class="col">
-          <h3 class="card-text"> Sri Lanka</h3>
+          <h3 class="card-text"> {{event['eventName']}}</h3>
         </div>
       </div>
       <div class="row border m-1">
         <div class="col">
-          <h3 class="card-text"> Country </h3>
+          <h3 class="card-text"> Location </h3>
         </div>
         <div class="col">
-          <h3 class="card-text"> Sri Lanka</h3>
+          <h3 class="card-text"> {{event['location']}}</h3>
+        </div>
+      </div>
+      <div class="row border m-1">
+        <div class="col">
+          <h3 class="card-text"> Type </h3>
+        </div>
+        <div class="col">
+          <h3 class="card-text"> {{event['eventType']}}</h3>
         </div>
       </div>
 
@@ -32,89 +32,7 @@
 
       <div class="d-flex justify-content-between align-items-center m-1">
         <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-        </div>
-        <small class="text-muted">9 mins</small>
-      </div>
-    </div>
-  </div>
-</div>
-  <div class="col">
-    <div class="card shadow-sm">
-      <img src="assets/end.webp" class="bd-placeholder-img card-img-top" width="100%" height="225">
-      <div class="card-body">
-        <div class="row border m-1">
-          <div class="col">
-            <h3 class="card-text"> Country </h3>
-          </div>
-          <div class="col">
-            <h3 class="card-text"> Sri Lanka</h3>
-          </div>
-        </div>
-        <div class="row border m-1">
-          <div class="col">
-            <h3 class="card-text"> Country </h3>
-          </div>
-          <div class="col">
-            <h3 class="card-text"> Sri Lanka</h3>
-          </div>
-        </div>
-        <div class="row border m-1">
-          <div class="col">
-            <h3 class="card-text"> Country </h3>
-          </div>
-          <div class="col">
-            <h3 class="card-text"> Sri Lanka</h3>
-          </div>
-        </div>
-
-
-
-        <div class="d-flex justify-content-between align-items-center m-1">
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-          </div>
-          <small class="text-muted">9 mins</small>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-  <div class="card shadow-sm">
-    <img src="assets/EventHeader-GamethonExpo2020.jpg" class="bd-placeholder-img card-img-top" width="100%" height="225">
-    <div class="card-body">
-      <div class="row border m-1">
-        <div class="col">
-          <h3 class="card-text"> Country </h3>
-        </div>
-        <div class="col">
-          <h3 class="card-text"> Sri Lanka</h3>
-        </div>
-      </div>
-      <div class="row border m-1">
-        <div class="col">
-          <h3 class="card-text"> Country </h3>
-        </div>
-        <div class="col">
-          <h3 class="card-text"> Sri Lanka</h3>
-        </div>
-      </div>
-      <div class="row border m-1">
-        <div class="col">
-          <h3 class="card-text"> Country </h3>
-        </div>
-        <div class="col">
-          <h3 class="card-text"> Sri Lanka</h3>
-        </div>
-      </div>
-
-
-
-      <div class="d-flex justify-content-between align-items-center m-1">
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="redirectoeventpage(event['eventId'])" >View</button>
           <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
         </div>
         <small class="text-muted">9 mins</small>

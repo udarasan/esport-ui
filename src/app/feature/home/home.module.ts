@@ -9,6 +9,7 @@ import { IndexComponent } from './componets/index/index.component';
 import {SharedModule} from "../../shared/shared.module";
 import { EventsComponent } from './componets/events/events.component';
 import { OrgandclansComponent } from './componets/organdclans/organdclans.component';
+import { EventPageComponent } from './componets/event-page/event-page.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { OrgandclansComponent } from './componets/organdclans/organdclans.compon
     SliderComponent,
     IndexComponent,
     EventsComponent,
-    OrgandclansComponent
+    OrgandclansComponent,
+    EventPageComponent
   ],
     imports: [
         CommonModule,

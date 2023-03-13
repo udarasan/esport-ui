@@ -17,8 +17,8 @@ constructor(private authService:AuthService,private router: Router) {
   loginFunction() {
     this.authService.login(new AuthDTO(this.username.value,this.password.value)).subscribe((res:any)=>{
       if (res.code=='201'){
-        sessionStorage.setItem('token', JSON.stringify(res.data.token));
-        sessionStorage.setItem('username', JSON.stringify(res.data.username));
+        sessionStorage.setItem('token', JSON.stringify(res.data.token).replace(/['"]+/g, ''));
+        sessionStorage.setItem('username', JSON.stringify(res.data.username).replace(/['"]+/g, ''));
         this.router.navigate(['/']);
       }
     })
