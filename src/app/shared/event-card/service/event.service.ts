@@ -16,6 +16,13 @@ export class EventService {
       })
     });
   };
+  getOneEventById(eventId: string | null) :Observable<any>{
+    return this.httpClient.get(this.url+"/getOneEvent?eventId="+eventId,{
+      headers:new HttpHeaders({
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+      })
+    });
+  }
 
 
 }

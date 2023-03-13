@@ -1,3 +1,37 @@
 header{
   background-color: #00264d;
 }
+.logo-bg-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: 190px;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index:99;
+}
+.logo-bg {
+  position: relative;
+  max-width: 190px;
+  text-align: center;
+}
+.logo {
+  z-index: 2;
+  position: relative;
+  max-width: 100px;
+  margin: 20px auto;
+  max-height: 80px;
+  width: auto;
+}
+.logo-bg:before {
+  content: '';
+  background: url('https://ingame.gg/themes/ingame-esports/assets/images/logo-bg.png') no-repeat center center;
+  background-size: cover;
+  height: 114px;
+  width: 190px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {EventService} from "./service/event.service";
-import {Observable} from "rxjs";
+import {EventService} from "../../../../shared/event-card/service/event.service";
 
 @Component({
   selector: 'app-event-page',
