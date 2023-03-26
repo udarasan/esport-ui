@@ -16,13 +16,44 @@
       <div class="row">
         <div class="col-8">
           <!-- About Listing-->
-          <div class="text-block">
+          <div *ngIf="showFirstDiv" class="text-block">
             <h3 class="mb-3">About</h3>
             <p class="text-muted">  {{description}}</p>
             <p class="text-muted">  {{description}}</p>
             <p class="text-muted">  {{description}}</p>
             <p class="text-muted">  {{description}}</p>
              </div>
+          <div *ngIf="!showFirstDiv" class="text-block">
+            <div class="row">
+              <h1>Registration</h1>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="birthdayInput" class="form-label">Date of Birth</label>
+                  <input type="date" class="form-control" id="birthdayInput" name="birthdayInput" [formControl]="eveRegDob">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="teamSelect" class="form-label">TeamDTO</label>
+                  <select class="form-select" id="teamSelect" name="teamSelect" [(ngModel)]="teamId" >
+                    <option value="">Select a team</option>
+                    <option *ngFor="let team of teamDataSource" [value]="team.teamId">{{team.teamName}}</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="mb-3">
+              <label for="telephoneInput" class="form-label">Telephone Number</label>
+              <input type="tel" class="form-control" id="telephoneInput" name="telephoneInput" [formControl]="eveRegNumber">
+            </div>
+            <button class="btn btn-primary" (click)="eventReg()" > Register To Event</button>
+          </div>
+
+
         </div>
         <div class="col-4">
           <div class="ps-xl-4">
@@ -67,7 +98,7 @@
                   <tr>
                     <th class="ps-0">Description</th>
                     <td class="pe-0 text-end">
-                      <button class="btn btn-primary"> Register To Event</button>
+                      <button class="btn btn-primary" (click)="toggleDiv()" > Register To Event</button>
                     </td>
                   </tr>
                   </tbody></table>

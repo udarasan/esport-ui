@@ -10,7 +10,12 @@ import {SharedModule} from "../../shared/shared.module";
 import { EventsComponent } from './componets/events/events.component';
 import { OrgandclansComponent } from './componets/organdclans/organdclans.component';
 import { EventPageComponent } from './componets/event-page/event-page.component';
-
+import { DashboardComponent } from './componets/dashboard/dashboard.component';
+import { AccountComponent } from './componets/dashboard/components/account/account.component';
+import { RegistrationComponent } from './componets/dashboard/components/registration/registration.component';
+import { UserDashboardComponent } from './componets/dashboard/components/user-dashboard/user-dashboard.component';
+import { RegistrationCardComponent } from './componets/dashboard/components/user-dashboard/components/registration-card/registration-card.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -19,13 +24,20 @@ import { EventPageComponent } from './componets/event-page/event-page.component'
     IndexComponent,
     EventsComponent,
     OrgandclansComponent,
-    EventPageComponent
+    EventPageComponent,
+    DashboardComponent,
+    AccountComponent,
+    RegistrationComponent,
+    UserDashboardComponent,
+    RegistrationCardComponent,
   ],
-    imports: [
-        CommonModule,
-        HomeRoutingModule,
-        CoreModule,
-        SharedModule
-    ]
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    CoreModule,
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule
+  ]
 })
 export class HomeModule { }

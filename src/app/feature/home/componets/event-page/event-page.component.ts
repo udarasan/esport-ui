@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {EventService} from "../../../../shared/event-card/service/event.service";
+import {EventRegDTO} from "./dto/EventRegDTO";
+import {TeamDTO} from "./dto/TeamDTO";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-event-page',
@@ -8,8 +11,9 @@ import {EventService} from "../../../../shared/event-card/service/event.service"
   styleUrls: ['./event-page.component.scss']
 })
 export class EventPageComponent implements OnInit{
-constructor(private route:ActivatedRoute,private eventPageService:EventService) {}
 
+constructor(private route:ActivatedRoute,private eventPageService:EventService) {}
+  showFirstDiv = true;
   country:any
   description:any
   endTime:any
@@ -21,6 +25,14 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
   location:any
   organizer:any
   startTime:any
+
+  teamDataSource!: TeamDTO[];
+
+  //create-event-registration-details
+  eveRegNumber=new FormControl()
+  eveRegDob=new FormControl()
+  teamId: any;
+
   ngOnInit(): void {
     let eventId=this.route.snapshot.paramMap.get('id')
     this.eventPageService.getOneEventById(eventId).subscribe((res:any)=>{
@@ -39,9 +51,41 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
       }
     })
 
+    this.eventPageService.getAllTeams().subscribe((res:any)=>{
+      if (res.code == 201) {
+        this.teamDataSource = res.data;
+        console.log('------------')
+        console.log(res.data)
+        console.log('------------')
+      }
+    })
+
 
   }
 
 
+  toggleDiv() {
+    this.showFirstDiv = !this.showFirstDiv;
+  }
 
+  eventReg() {
+    let eventId=localStorage.getItem('username')
+    this.eventPageService.creteEventReg(new EventRegDTO(
+      0,
+      this.eveRegDob.value,
+      this.eveRegNumber.value,
+      this.eventId,
+      this.teamId,
+      localStorage.getItem('username') || '',
+      this.gameId
+    )).subscribe(
+      (res:any)=>{
+        if (res.code==201){
+          alert("Registration Is Success!")
+        }else {
+          alert("Registration Is Failed!")
+        }
+    })
+
+  }
 }

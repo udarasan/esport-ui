@@ -26,4 +26,8 @@ export class EventCardComponent implements OnInit{
     this.route.navigateByUrl('/events/'+eventId)
 
   }
+  redirectoeventRegpage(eventId: any) {
+    this.route.navigateByUrl('/eveReg/'+eventId)
+
+  }
 }
