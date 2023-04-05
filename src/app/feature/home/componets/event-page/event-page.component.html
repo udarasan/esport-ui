@@ -24,6 +24,8 @@
             <p class="text-muted">  {{description}}</p>
              </div>
           <div *ngIf="!showFirstDiv" class="text-block">
+            <div id="none-paid-div"></div>
+            <div id="paid-div"></div>
             <div class="row">
               <h1>Registration</h1>
             </div>
@@ -36,7 +38,7 @@
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label for="teamSelect" class="form-label">TeamDTO</label>
+                  <label for="teamSelect" class="form-label">Select a team</label>
                   <select class="form-select" id="teamSelect" name="teamSelect" [(ngModel)]="teamId" >
                     <option value="">Select a team</option>
                     <option *ngFor="let team of teamDataSource" [value]="team.teamId">{{team.teamName}}</option>
@@ -45,15 +47,21 @@
               </div>
 
             </div>
-
             <div class="mb-3">
               <label for="telephoneInput" class="form-label">Telephone Number</label>
               <input type="tel" class="form-control" id="telephoneInput" name="telephoneInput" [formControl]="eveRegNumber">
             </div>
-            <button class="btn btn-primary" (click)="eventReg()" > Register To Event</button>
+            <div *ngIf="isPaid" class="text-block">
+              <strong>Registration Fee</strong>
+              <h3>{{payment}}</h3>
+              <div id="paypal"></div>
+              <button class="btn btn-success mb-2" [disabled]="isPayButtonDisabled" (click)="runPayPal()">Do Payment</button>
+            </div>
+
+
+            <button class="btn btn-primary" [disabled]="isRegButtonDisabled"  (click)="eventReg()" > Register To Event</button>
+
           </div>
-
-
         </div>
         <div class="col-4">
           <div class="ps-xl-4">
@@ -96,7 +104,7 @@
                     <td class="pe-0 text-end">{{country}}</td>
                   </tr>
                   <tr>
-                    <th class="ps-0">Description</th>
+                    <th class="ps-0">IsPayment</th>
                     <td class="pe-0 text-end">
                       <button class="btn btn-primary" (click)="toggleDiv()" > Register To Event</button>
                     </td>

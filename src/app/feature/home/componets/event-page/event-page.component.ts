@@ -1,9 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {EventService} from "../../../../shared/event-card/service/event.service";
 import {EventRegDTO} from "./dto/EventRegDTO";
 import {TeamDTO} from "./dto/TeamDTO";
 import {FormControl} from "@angular/forms";
+import {loadScript} from "@paypal/paypal-js";
 
 @Component({
   selector: 'app-event-page',
@@ -12,7 +16,15 @@ import {FormControl} from "@angular/forms";
 })
 export class EventPageComponent implements OnInit{
 
-constructor(private route:ActivatedRoute,private eventPageService:EventService) {}
+constructor(private route:ActivatedRoute,private eventPageService:EventService) {
+  console.log('constructor')
+
+}
+
+
+  isPayButtonDisabled: boolean = false;
+  isRegButtonDisabled: boolean = false;
+
   showFirstDiv = true;
   country:any
   description:any
@@ -21,6 +33,8 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
   eventImage:any
   eventName:any
   eventType:any
+  isPaid:any;
+  payment:any;
   gameId:any
   location:any
   organizer:any
@@ -32,8 +46,11 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
   eveRegNumber=new FormControl()
   eveRegDob=new FormControl()
   teamId: any;
+  paypal!:any;
+
 
   ngOnInit(): void {
+    console.log('onInit')
     let eventId=this.route.snapshot.paramMap.get('id')
     this.eventPageService.getOneEventById(eventId).subscribe((res:any)=>{
       if (res.code=='201'){
@@ -44,12 +61,21 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
         this.eventId=res.data.eventId
         this.eventImage=res.data.eventImage
         this.eventType=res.data.eventType
+        this.isPaid=res.data.isPaid
+
+        if (this.isPaid){
+          this.isRegButtonDisabled=true
+        }
+        this.payment=res.data.payment
         this.gameId=res.data.gameId
         this.location=res.data.location
         this.organizer=res.data.organizer
         this.startTime=res.data.startTime
       }
     })
+
+
+
 
     this.eventPageService.getAllTeams().subscribe((res:any)=>{
       if (res.code == 201) {
@@ -61,15 +87,48 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
     })
 
 
+
   }
 
+  async runPayPal() {
+
+    this.isPayButtonDisabled=true;
+    try {
+      this.paypal = await loadScript({"client-id": "AeFXB_20TV8N8qgJreAwKE8rB-r53Q_gtuyGTR1a18GMx2mBgxF-Gq9Th2pccHxV4jbdwqKmPBt-aels" });
+    } catch (error) {
+      console.error("failed to load the PayPal JS SDK script", error);
+    }
+
+    if (this.paypal) {
+      try {
+        await this.paypal.Buttons({
+          createOrder: function(data:any, actions:any) {
+            // This function sets up the details of the transaction, including the amount and line item details.
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value:'0.01'
+                }
+              }]
+            });
+          },
+        }).render('#paypal');
+
+        //todo chekck payment is success or not
+        // todo if payment success enable isRegButton=false
+        // todo if payment Failed enable isRegButton=ture
+        // todo set amount dynamically
+      } catch (error) {
+        console.error("failed to render the PayPal Buttons", error);
+      }
+    }
+  }
 
   toggleDiv() {
     this.showFirstDiv = !this.showFirstDiv;
   }
 
   eventReg() {
-    let eventId=localStorage.getItem('username')
     this.eventPageService.creteEventReg(new EventRegDTO(
       0,
       this.eveRegDob.value,
@@ -88,4 +147,9 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
     })
 
   }
+
+
+
+
 }
+
