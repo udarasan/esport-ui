@@ -9,6 +9,8 @@ import {TeamDTO} from "./dto/TeamDTO";
 import {FormControl} from "@angular/forms";
 import {loadScript} from "@paypal/paypal-js";
 
+
+
 @Component({
   selector: 'app-event-page',
   templateUrl: './event-page.component.html',
@@ -22,8 +24,8 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
 }
 
 
-  isPayButtonDisabled: boolean = false;
-  isRegButtonDisabled: boolean = false;
+   isPayButtonDisabled: boolean = false;
+   isRegButtonDisabled: boolean = false;
 
   showFirstDiv = true;
   country:any
@@ -101,6 +103,7 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
 
     if (this.paypal) {
       try {
+        const self = this;
         await this.paypal.Buttons({
           createOrder: function(data:any, actions:any) {
             // This function sets up the details of the transaction, including the amount and line item details.
@@ -112,13 +115,22 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
               }]
             });
           },
-        }).render('#paypal');
+          onApprove: function(data:any, actions:any) {
+            // This function is called when the buyer approves the payment.
+            // You can use the data object to verify the payment on the server side.
+            // If the payment is successful, enable the registration button.
 
-        //todo chekck payment is success or not
-        // todo if payment success enable isRegButton=false
-        // todo if payment Failed enable isRegButton=ture
+            // todo: verify payment on server side
+
+            self.isRegButtonDisabled = false;
+          }
+          //todo chekck payment is success or not
+
+        }).render('#paypal');
         // todo set amount dynamically
+
       } catch (error) {
+        // todo if payment Failed enable isRegButton=ture
         console.error("failed to render the PayPal Buttons", error);
       }
     }
@@ -135,7 +147,7 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
       this.eveRegNumber.value,
       this.eventId,
       this.teamId,
-      localStorage.getItem('username') || '',
+      sessionStorage.getItem('username') || '',
       this.gameId
     )).subscribe(
       (res:any)=>{
