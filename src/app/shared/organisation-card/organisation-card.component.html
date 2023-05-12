@@ -1,16 +1,16 @@
 
-<mat-card class="example-card m-3">
+<mat-card class="example-card m-3" *ngFor="let org of dataSource">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-card-title>MAXIMUM E-SPORTS</mat-card-title>
-      <mat-card-subtitle>We are a professional E-sports Organization with a base of more than 400 CYBER</mat-card-subtitle>
+      <mat-card-title>{{org.teamName}}</mat-card-title>
+      <mat-card-subtitle>{{org.description}}</mat-card-subtitle>
       <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
     </mat-card-title-group>
   </mat-card-header>
   <mat-card-content>
     <div class="row">
-      <div class="col-6">Country</div>
-      <div class="col-6">Teams</div>
+      <div class="col-6">{{org.country}}</div>
+      <div class="col-6">{{org.teamId}}</div>
       <div class="col-6">Members</div>
       <div class="col-6">Other</div>
     </div>

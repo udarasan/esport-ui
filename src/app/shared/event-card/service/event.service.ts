@@ -3,6 +3,7 @@ import {environment} from "../../../../envitonments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {EventRegDTO} from "../../../feature/home/componets/event-page/dto/EventRegDTO";
+import {TeamDTO} from "../../../feature/home/componets/event-page/dto/TeamDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class EventService {
   url = environment.baseUrl+'event';
   url2 = environment.baseUrl+'eventRegistration';
   url3 = environment.baseUrl+'team';
+  url4 = environment.baseUrl+'user';
   constructor(private httpClient: HttpClient) { }
   getAllEvents(): Observable<any> {
     return this.httpClient.get(this.url+"/getAllEvents",{
@@ -51,4 +53,41 @@ export class EventService {
       })
     });
   }
+
+  creteTeam(teamDTO: TeamDTO):Observable<any> {
+    return this.httpClient.post(this.url3+"/add",{
+      "teamId": 0,
+      "teamName": teamDTO.teamName,
+      "description": teamDTO.description,
+      "country": teamDTO.country,
+    },{
+      headers:new HttpHeaders({
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+      })})
+
+  }
+
+  getAllMembers() {
+    return this.httpClient.get(this.url4+"/getAllPayerUsers",{
+      headers:new HttpHeaders({
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+      })
+    });
+  }
+
+  getLastTeam() {
+    return this.httpClient.get(this.url3+"/getLastTeamId",{
+      headers:new HttpHeaders({
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+      })
+    });
+  }
+  getOneUserByToken() {
+    return this.httpClient.get(this.url4+"/getOneUserByToken",{
+      headers:new HttpHeaders({
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+      })
+    });
+  }
+
 }

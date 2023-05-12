@@ -37,12 +37,14 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="mb-3">
+
+                <div class="mb-3" *ngIf="!isEventTypeSolo" >
                   <label for="teamSelect" class="form-label">Select a team</label>
                   <select class="form-select" id="teamSelect" name="teamSelect" [(ngModel)]="teamId" >
                     <option value="">Select a team</option>
                     <option *ngFor="let team of teamDataSource" [value]="team.teamId">{{team.teamName}}</option>
                   </select>
+                  <a type="button" (click)="redirectoTeampage()" style="color: blue">Create A New Team</a>
                 </div>
               </div>
 

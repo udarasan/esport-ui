@@ -9,6 +9,8 @@ import {DashboardComponent} from "./componets/dashboard/dashboard.component";
 import {AccountComponent} from "./componets/dashboard/components/account/account.component";
 import {RegistrationComponent} from "./componets/dashboard/components/registration/registration.component";
 import {UserDashboardComponent} from "./componets/dashboard/components/user-dashboard/user-dashboard.component";
+import {TeamsComponent} from "./componets/teams/teams.component";
+import {ProfileComponent} from "./componets/profile/profile.component";
 
 
 
@@ -16,7 +18,9 @@ const routes: Routes = [
   {path:'', component:HomeComponent,children:[
       { path: '', component: IndexComponent},
       { path: 'events', component: EventsComponent},
+      { path: 'profile', component: ProfileComponent},
       { path: 'events/:id', component: EventPageComponent},
+      { path: 'team', component: TeamsComponent},
       { path: 'organization-and-clans', component: OrgandclansComponent},
       { path: 'user-dashboard', component: DashboardComponent,children:[
           {path:'account', component:AccountComponent},

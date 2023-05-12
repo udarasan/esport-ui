@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {EventService} from "../../../../shared/event-card/service/event.service";
 import {EventRegDTO} from "./dto/EventRegDTO";
 import {TeamDTO} from "./dto/TeamDTO";
@@ -18,7 +18,7 @@ import {loadScript} from "@paypal/paypal-js";
 })
 export class EventPageComponent implements OnInit{
 
-constructor(private route:ActivatedRoute,private eventPageService:EventService) {
+constructor(private route:ActivatedRoute,private eventPageService:EventService,private router:Router) {
   console.log('constructor')
 
 }
@@ -26,6 +26,7 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
 
    isPayButtonDisabled: boolean = false;
    isRegButtonDisabled: boolean = false;
+   isEventTypeSolo:boolean=false;
 
   showFirstDiv = true;
   country:any
@@ -67,6 +68,10 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
 
         if (this.isPaid){
           this.isRegButtonDisabled=true
+        }
+        if (this.eventType=='Solo'){
+          console.log('this.eventType')
+          this.isEventTypeSolo=true
         }
         this.payment=res.data.payment
         this.gameId=res.data.gameId
@@ -139,7 +144,11 @@ constructor(private route:ActivatedRoute,private eventPageService:EventService) 
   toggleDiv() {
     this.showFirstDiv = !this.showFirstDiv;
   }
+  redirectoTeampage() {
+    const url = this.router.serializeUrl(this.router.createUrlTree(['/team']));
+    window.open(url, '_blank');
 
+  }
   eventReg() {
     this.eventPageService.creteEventReg(new EventRegDTO(
       0,

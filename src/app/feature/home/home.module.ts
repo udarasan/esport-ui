@@ -16,6 +16,8 @@ import { RegistrationComponent } from './componets/dashboard/components/registra
 import { UserDashboardComponent } from './componets/dashboard/components/user-dashboard/user-dashboard.component';
 import { RegistrationCardComponent } from './componets/dashboard/components/user-dashboard/components/registration-card/registration-card.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { TeamsComponent } from './componets/teams/teams.component';
+import { ProfileComponent } from './componets/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     RegistrationComponent,
     UserDashboardComponent,
     RegistrationCardComponent,
+    TeamsComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
