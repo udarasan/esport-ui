@@ -90,4 +90,11 @@ export class EventService {
     });
   }
 
+  getRegEveDetails() {
+    return this.httpClient.get(this.url2+"/getAllEventsRegByUserName",{
+      headers:new HttpHeaders({
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+      })
+    });
+  }
 }

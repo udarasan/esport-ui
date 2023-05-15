@@ -11,6 +11,7 @@ import {RegistrationComponent} from "./componets/dashboard/components/registrati
 import {UserDashboardComponent} from "./componets/dashboard/components/user-dashboard/user-dashboard.component";
 import {TeamsComponent} from "./componets/teams/teams.component";
 import {ProfileComponent} from "./componets/profile/profile.component";
+import {RegEventsComponent} from "./componets/profile/reg-events/reg-events.component";
 
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent},
       { path: 'events/:id', component: EventPageComponent},
       { path: 'team', component: TeamsComponent},
+      { path: 'reg', component: RegEventsComponent},
       { path: 'organization-and-clans', component: OrgandclansComponent},
       { path: 'user-dashboard', component: DashboardComponent,children:[
           {path:'account', component:AccountComponent},

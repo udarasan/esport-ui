@@ -1,7 +1,7 @@
 <div class="row  row-cols-lg-3 align-items-stretch g-4 py-5">
   <div class="col" *ngFor="let event of dataSource" (click)="redirectoeventpage(event['eventId'])">
   <div class="card shadow-sm">
-    <img src="assets/51797928_1499160080214238_1803249020022292480_o-750x420.jpg" class="bd-placeholder-img card-img-top" width="100%" height="225">
+    <img src="assets/eventImages/{{event['eventImage']}}" class="bd-placeholder-img card-img-top" width="100%" height="225">
     <div class="card-body">
       <div class="row border m-1">
         <div class="col">

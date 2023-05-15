@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit{
   email1: any;
   team: any;
   team1: any;
+  dp: any;
   ngOnInit(): void {
     this.getUserDetails();
   }
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit{
         this.name1 = res.data.name;
         this.email1 = res.data.email;
         this.team1=res.data.teamId
+        this.dp=res.data.idPhoto
         console.log('------------')
         console.log(res.data)
         console.log('------------')
